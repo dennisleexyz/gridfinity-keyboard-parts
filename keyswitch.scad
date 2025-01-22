@@ -6,6 +6,7 @@ function keyc(sw) = sw[2]; // keycap [X, Y]
 function pins(sw) = sw[3]; // [X position, Y position, Z-height, diameter]
 function pinz(sw) = max([for (pin = pins(sw)) pin.z]); // max pin Z-height
 function h(sw) = sw[4]; // total switch height including pins,  excluding caps
+function plate(sw) = sw[5]; // plate Z-height
 
 presets = [
     [ // Cherry MX
@@ -23,6 +24,7 @@ presets = [
             [5.08, 0, 3.3, 1.7],
         ],
         3.3 + 11.6 + 3.6,
+        1.5,
     ],
     [ // Kailh PG1350 Choc v1
         [u, u],
@@ -36,6 +38,7 @@ presets = [
             [11.00/2, 0, 3.00, 1.90],
         ],
         3.00 + 5.00 + 3.00,
+        1.30,
     ]
 ];
 

@@ -115,6 +115,7 @@ sy = GRID_DIMENSIONS_MM.y;
 kx = k(sw).x;
 ky = k(sw).y;
 kcoz = kco(sw).z;
+plate = plate(sw);
 rows = floor(sx/kx);
 cols = floor(sy/ky);
 
@@ -140,7 +141,7 @@ pattern_linear(x=gridx, y=gridy, sx=sx, sy=sy) {
     let (
         x = base_bottom_dimensions().x,
         y = base_bottom_dimensions().y,
-        z = pinz(sw)+kcoz,
+        z = pinz(sw)+kcoz-plate,
         r = r_c1
     ) {
         translate([-x/2+r, -y/2+r, z])
