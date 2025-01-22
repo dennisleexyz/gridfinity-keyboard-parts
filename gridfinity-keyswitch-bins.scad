@@ -45,7 +45,8 @@ gridy = 2; //.5
 switch = 0; // [0: Cherry MX, 1: Kailh PG1350 Choc v1]
 sw = presets[switch];
 // bin height. See bin height information and "gridz_define" below.
-gridz = ceil(h(sw)/7); //.1
+gridz = h(sw); //.1
+//gridz = ceil(h(sw)/7); //.1
 
 /* [Linear Compartments] */
 // number of X Divisions (set to zero to have solid bin)
@@ -71,11 +72,11 @@ c_chamfer = 0.5; // .1
 
 /* [Height] */
 // determine what the variable "gridz" applies to based on your use case
-gridz_define = 0; // [0:gridz is the height of bins in units of 7mm increments - Zack's method,1:gridz is the internal height in millimeters, 2:gridz is the overall external height of the bin in millimeters]
+gridz_define = 2; // [0:gridz is the height of bins in units of 7mm increments - Zack's method,1:gridz is the internal height in millimeters, 2:gridz is the overall external height of the bin in millimeters]
 // overrides internal block height of bin (for solid containers). Leave zero for default height. Units: mm
 height_internal = 0;
 // snap gridz height to nearest 7mm increment
-enable_zsnap = false;
+enable_zsnap = true;
 
 /* [Features] */
 // the type of tabs
