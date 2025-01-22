@@ -2,7 +2,7 @@ include <units.scad>
 
 function k(sw) = sw[0]; // spacing between key centers [X-axis, Y-axis]
 function kco(sw) = sw[1]; // key cutout hole [X, Y, Z-height]
-function keyc(sw) = sw[1]; // keycap [X, Y]
+function keyc(sw) = sw[2]; // keycap [X, Y]
 function pins(sw) = sw[3]; // [X position, Y position, Z-height, diameter]
 function pinz(sw) = max([for (pin = pins(sw)) pin.z]); // max pin Z-height
 function h(sw) = sw[4]; // total switch height including pins,  excluding caps
