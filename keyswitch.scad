@@ -23,8 +23,6 @@ presets = [
             [5.08, 0, 3.3, 1.7],
         ],
         3.3 + 11.6 + 3.6,
-        //[[-3.81, 2.54, 3.3, 1.5], [2.54, 5.08, 3.3, 1.5]],
-        //[[0, 3.3, 4], [5.08, 3.3, 1.7]],
     ],
     [ // Kailh PG1350 Choc v1
         [u, u],
@@ -46,15 +44,6 @@ module ksw(sw) {
     for (pin = pins(sw))
         translate([pin.x, pin.y])
             cylinder(h=pin.z, d=pin[3]);
-    
-//    for (pth = pths)
-//        translate([pth.x, pth.y])
-//            cylinder(h=pth.z, d=pth[3]);
-    
-//    for (npth = npths)
-//        pattern_circular(n=2) 
-//            translate([npth.x, 0])
-//                cylinder(h=npth[1], d=npth[2])
     
     // key cutout hole
     let (x = kco(sw).x, y = kco(sw).y)
