@@ -38,7 +38,7 @@ $fs = 0.25; // .01
 
 /* [General Settings] */
 // number of bases along x-axis
-gridx = 3; //.5
+gridx = 2; //.5
 // number of bases along y-axis
 gridy = 2; //.5
 // Keyswitch
@@ -47,6 +47,8 @@ sw = presets[switch];
 // bin height. See bin height information and "gridz_define" below.
 gridz = h(sw); //.1
 //gridz = ceil(h(sw)/7); //.1
+// switch orientation
+facing = 4; // [1: North, 2: North and South, 4: North, South, East, and West]
 
 /* [Linear Compartments] */
 // number of X Divisions (set to zero to have solid bin)
@@ -112,8 +114,10 @@ hole_options = bundle_hole_options(refined_holes, magnet_holes, screw_holes, cru
 
 sx = GRID_DIMENSIONS_MM.x;
 sy = GRID_DIMENSIONS_MM.y;
-kx = k(sw).x;
-ky = k(sw).y;
+ew = facing < 3; // East and West facing switches
+k = max(k(sw).x, k(sw).y);
+kx = ew ? k(sw).x : k;
+ky = ew ? k(sw).y : k;
 kcoz = kco(sw).z;
 plate = plate(sw);
 rows = floor(sx/kx);
@@ -136,7 +140,8 @@ gridfinityBase([gridx, gridy], hole_options=hole_options, only_corners=only_corn
 }
 pattern_linear(x=gridx, y=gridy, sx=sx, sy=sy) {
     pattern_linear(x=rows, y=cols, sx=kx, sy=ky)
-        ksw(sw);
+        pattern_circular(facing)
+            ksw(sw);
     // keycap lower cutout hole
     let (
         x = base_bottom_dimensions().x,
