@@ -153,7 +153,7 @@ gridfinityBase([gridx, gridy], hole_options=hole_options, only_corners=only_corn
 pattern_linear(x=gx, y=gy, sx=sx, sy=sy) {
     pattern_linear(x=rows, y=cols, sx=kx, sy=ky)
         pattern_circular(facing)
-            ksw(sw);
+            render() ksw(sw);
     // lower key cutout hole
     let (
         x = base_bottom.x,
