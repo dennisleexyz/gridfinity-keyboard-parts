@@ -112,8 +112,17 @@ hole_options = bundle_hole_options(refined_holes, magnet_holes, screw_holes, cru
 
 // ===== IMPLEMENTATION ===== //
 
-sx = GRID_DIMENSIONS_MM.x;
-sy = GRID_DIMENSIONS_MM.y;
+grid_dimensions = GRID_DIMENSIONS_MM;
+base_bottom = base_bottom_dimensions(BASE_TOP_DIMENSIONS);
+
+// Per spec, there's a 0.5mm gap between each base.
+// This must be kept constant or half bins may not work correctly.
+gap_mm = grid_dimensions - BASE_TOP_DIMENSIONS;
+
+gx = gridx;
+gy = gridy;
+sx = grid_dimensions.x;
+sy = grid_dimensions.y;
 ew = facing < 3; // East and West facing switches
 k = max(k(sw).x, k(sw).y);
 kx = ew ? k(sw).x : k;
@@ -138,31 +147,32 @@ gridfinityInit(gridx, gridy, height(gridz, gridz_define, style_lip, enable_zsnap
 }
 gridfinityBase([gridx, gridy], hole_options=hole_options, only_corners=only_corners, thumbscrew=enable_thumbscrew);
 }
-pattern_linear(x=gridx, y=gridy, sx=sx, sy=sy) {
+pattern_linear(x=gx, y=gy, sx=sx, sy=sy) {
     pattern_linear(x=rows, y=cols, sx=kx, sy=ky)
         pattern_circular(facing)
             ksw(sw);
-    // keycap lower cutout hole
+    // lower key cutout hole
     let (
-        x = base_bottom_dimensions().x,
-        y = base_bottom_dimensions().y,
+        x = base_bottom.x,
+        y = base_bottom.y,
         z = pinz(sw)+kcoz-plate,
         r = r_c1
     ) {
         translate([-x/2+r, -y/2+r, z])
             rounded_square(
-                [x, y, fromGridfinityUnits(1,true)-z], r
+                [x, y, fromGridfinityUnits(1)-z], r
             );
     }
 }
-// keycap upper cutout hole
+// upper keycap cutout hole
 let (
-    x = sx*(gridx-1)+rows*kx,
-    y = sy*(gridy-1)+cols*ky,
+    x = sx*(gx-1)+kx*rows,
+    y = sy*(gy-1)+ky*cols,
     z = pinz(sw)+kcoz,
-    r = r_base-max(sx-kx*rows, sy-ky*cols)/2
+    h = BASE_HEIGHT+height(gridz,gridz_define,style_lip,enable_zsnap)+STACKING_LIP_SIZE.y-z,
+    r = r_base-max(sx*gx-gap_mm.x-x,sy*gy-gap_mm.y-y)/2
 ) {
     translate([-x/2+r, -y/2+r, z])
-        rounded_square([x, y, fromGridfinityUnits(gridz,true)-z], r);
+        rounded_square([x, y, h], r);
 }
 }
