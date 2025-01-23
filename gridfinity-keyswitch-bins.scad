@@ -41,14 +41,14 @@ $fs = 0.25; // .01
 gridx = 2; //.5
 // number of bases along y-axis
 gridy = 2; //.5
-// Keyswitch
+// keyswitch
 switch = 0; // [0: Cherry MX, 1: Kailh PG1350 Choc v1, 2: Kailh PG1353 Choc v2]
 sw = presets[switch];
 // bin height. See bin height information and "gridz_define" below.
 gridz = h(sw); //.1
 //gridz = ceil(h(sw)/7); //.1
 // switch orientation
-facing = 4; // [1: South, 2: North and South, 4: North, South, East, and West]
+facing = 4; // [1: South, 2: North/South, 4: North/South/East/West]
 stackable = true;
 
 /* [Linear Compartments] */
