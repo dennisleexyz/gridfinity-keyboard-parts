@@ -119,6 +119,8 @@ k = max(k(sw).x, k(sw).y);
 kx = ew ? k(sw).x : k;
 ky = ew ? k(sw).y : k;
 kcoz = kco(sw).z;
+keycx = keyc(sw).x;
+keycy = keyc(sw).y;
 plate = plate(sw);
 rows = floor(sx/kx);
 cols = floor(sy/ky);
@@ -157,8 +159,8 @@ pattern_linear(x=gridx, y=gridy, sx=sx, sy=sy) {
 }
 // keycap upper cutout hole
 let (
-    x = sx*(gridx-1)+rows*kx,
-    y = sy*(gridy-1)+cols*ky,
+    x = (gridx-1)*sx+(rows-1)*kx+keycx,
+    y = (gridy-1)*sy+(cols-1)*ky+keycy,
     z = pinz(sw)+kcoz,
     r = r_base-max(sx-kx*rows, sy-ky*cols)/2
 ) {
