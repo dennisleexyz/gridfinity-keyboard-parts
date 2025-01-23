@@ -48,7 +48,7 @@ sw = presets[switch];
 gridz = h(sw); //.1
 //gridz = ceil(h(sw)/7); //.1
 // switch orientation
-facing = 4; // [1: North, 2: North and South, 4: North, South, East, and West]
+facing = 4; // [1: South, 2: North and South, 4: North, South, East, and West]
 
 /* [Linear Compartments] */
 // number of X Divisions (set to zero to have solid bin)
