@@ -42,7 +42,7 @@ gridx = 2; //.5
 // number of bases along y-axis
 gridy = 2; //.5
 // Keyswitch
-switch = 0; // [0: Cherry MX, 1: Kailh PG1350 Choc v1]
+switch = 0; // [0: Cherry MX, 1: Kailh PG1350 Choc v1, 2: Kailh PG1353 Choc v2]
 sw = presets[switch];
 // bin height. See bin height information and "gridz_define" below.
 gridz = h(sw); //.1
