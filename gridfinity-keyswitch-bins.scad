@@ -49,6 +49,7 @@ gridz = h(sw); //.1
 //gridz = ceil(h(sw)/7); //.1
 // switch orientation
 facing = 4; // [1: South, 2: North and South, 4: North, South, East, and West]
+stackable = true;
 
 /* [Linear Compartments] */
 // number of X Divisions (set to zero to have solid bin)
@@ -134,15 +135,17 @@ cols = floor(sy/ky);
 
 difference(){
 color("tomato") {
-gridfinityInit(gridx, gridy, height(gridz, gridz_define, style_lip, enable_zsnap), height_internal, sl=style_lip) {
+if (stackable) {
+    gridfinityInit(gridx, gridy, height(gridz, gridz_define, style_lip, enable_zsnap), height_internal, sl=style_lip) {
 
-    if (divx > 0 && divy > 0) {
+        if (divx > 0 && divy > 0) {
 
-        cutEqual(n_divx = divx, n_divy = divy, style_tab = style_tab, scoop_weight = scoop, place_tab = place_tab);
+            cutEqual(n_divx = divx, n_divy = divy, style_tab = style_tab, scoop_weight = scoop, place_tab = place_tab);
 
-    } else if (cdivx > 0 && cdivy > 0) {
+        } else if (cdivx > 0 && cdivy > 0) {
 
-        cutCylinders(n_divx=cdivx, n_divy=cdivy, cylinder_diameter=cd, cylinder_height=ch, coutout_depth=c_depth, orientation=c_orientation, chamfer=c_chamfer);
+            cutCylinders(n_divx=cdivx, n_divy=cdivy, cylinder_diameter=cd, cylinder_height=ch, coutout_depth=c_depth, orientation=c_orientation, chamfer=c_chamfer);
+        }
     }
 }
 gridfinityBase([gridx, gridy], hole_options=hole_options, only_corners=only_corners, thumbscrew=enable_thumbscrew);
