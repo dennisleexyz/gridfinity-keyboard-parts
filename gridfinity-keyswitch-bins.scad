@@ -125,11 +125,12 @@ gy = gridy;
 sx = grid_dimensions.x;
 sy = grid_dimensions.y;
 ew = facing < 3; // East and West facing switches
-k = max(k(sw).x, k(sw).y);
+k = max(k(sw).x,k(sw).y);
 kx = ew ? k(sw).x : k;
 ky = ew ? k(sw).y : k;
 kcoz = kco(sw).z;
 plate = plate(sw);
+h = height(gridz, gridz_define, style_lip, enable_zsnap);
 rows = floor(sx/kx);
 cols = floor(sy/ky);
 
@@ -163,17 +164,17 @@ pattern_linear(x=gx, y=gy, sx=sx, sy=sy) {
     ) {
         translate([-x/2+r, -y/2+r, z])
             rounded_square(
-                [x, y, fromGridfinityUnits(1)-z], r
+                [x, y, BASE_HEIGHT+h-z], r
             );
     }
 }
 // upper keycap cutout hole
 let (
-    x = sx*(gx-1)+kx*rows,
-    y = sy*(gy-1)+ky*cols,
-    z = pinz(sw)+kcoz,
-    h = BASE_HEIGHT+height(gridz,gridz_define,style_lip,enable_zsnap)+STACKING_LIP_SIZE.y-z,
-    r = r_base-max(sx*gx-gap_mm.x-x,sy*gy-gap_mm.y-y)/2
+    x = sx*(gx-1) + kx*rows,
+    y = sy*(gy-1) + ky*cols,
+    z = pinz(sw) + kcoz,
+    h = BASE_HEIGHT + h + STACKING_LIP_SIZE.y - z,
+    r = r_base - max(sx*gx-gap_mm.x-x,sy*gy-gap_mm.y-y)/2
 ) {
     translate([-x/2+r, -y/2+r, z])
         rounded_square([x, y, h], r);
