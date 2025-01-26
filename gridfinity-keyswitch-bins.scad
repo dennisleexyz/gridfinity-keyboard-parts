@@ -25,7 +25,7 @@ https://github.com/kennetek/gridfinity-rebuilt-openscad
 */
 
 include <gridfinity-rebuilt-openscad/src/core/standard.scad>
-include <keyswitch.scad>
+include <key.scad/key.scad>
 use <gridfinity-rebuilt-openscad/src/core/gridfinity-rebuilt-utility.scad>
 use <gridfinity-rebuilt-openscad/src/core/gridfinity-rebuilt-holes.scad>
 use <gridfinity-rebuilt-openscad/src/helpers/generic-helpers.scad>
