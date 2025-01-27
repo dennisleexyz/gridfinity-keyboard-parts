@@ -158,7 +158,7 @@ pattern_linear(x=gx, y=gy, sx=sx, sy=sy) {
     let (
         x = base_bottom.x,
         y = base_bottom.y,
-        z = pinz(sw)+kcoz-plate,
+        z = pinz(sw) + kcoz - plate,
         r = r_c1
     ) {
         translate([-x/2+r, -y/2+r, z])
@@ -166,16 +166,16 @@ pattern_linear(x=gx, y=gy, sx=sx, sy=sy) {
                 [x, y, BASE_HEIGHT+h-z], r
             );
     }
-}
-// upper keycap cutout hole
-let (
-    x = sx*(gx-1) + kx*rows,
-    y = sy*(gy-1) + ky*cols,
-    z = pinz(sw) + kcoz,
-    h = BASE_HEIGHT + h + STACKING_LIP_SIZE.y - z,
-    r = r_base - max(sx*gx-gap_mm.x-x,sy*gy-gap_mm.y-y)/2
-) {
-    translate([-x/2+r, -y/2+r, z])
-        rounded_square([x, y, h], r);
+    // upper keycap cutout hole
+    let (
+        x = kx*rows,
+        y = ky*cols,
+        z = pinz(sw) + kcoz,
+        h = BASE_HEIGHT + h + STACKING_LIP_SIZE.y - z,
+        r = r_base - max(sx-gap_mm.x-x,sy-gap_mm.y-y)/2
+    ) {
+        translate([-x/2+r, -y/2+r, z])
+            rounded_square([x, y, h], r);
+    }
 }
 }
