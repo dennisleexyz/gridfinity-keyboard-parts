@@ -42,9 +42,9 @@ gridx = 1; //.5
 // number of bases along y-axis
 gridy = 1; //.5
 // keyswitch
-sw = mx;
+supported = [mx, kh, choc_v1, choc_v2, x];
 // bin height. See bin height information and "gridz_define" below.
-gridz = h(sw); //.1
+gridz = max([for (sw = supported) h(sw)]);
 //gridz = ceil(h(sw)/7); //.1
 // switch orientation
 facing = 4; // [1: South, 2: North/South, 4: North/South/East/West]
@@ -123,15 +123,17 @@ gx = gridx;
 gy = gridy;
 sx = grid_dimensions.x;
 sy = grid_dimensions.y;
+
 ew = facing > 2; // East and West facing switches
-k = max(k(sw));
-kx = ew ? k : k(sw).x;
-ky = ew ? k : k(sw).y;
-kcoz = kco(sw).z;
-plate = plate(sw);
+k = max([for (sw = supported) k(sw)]);
+kx = ew ? max(k) : k.x;
+ky = ew ? max(k) : k.y;
+kcoz = min([for (sw = supported) kco(sw).z]);
+plate = max([for (sw = supported) plate(sw)]);
 h = height(gridz, gridz_define, style_lip, enable_zsnap);
 rows = floor(sx/kx);
 cols = floor(sy/ky);
+pin = max([for (sw = supported) pinz(sw)]);
 
 difference(){
 color("tomato") {
@@ -156,12 +158,13 @@ gridfinityBase([gridx, gridy], hole_options=hole_options, only_corners=only_corn
 pattern_linear(x=gx, y=gy, sx=sx, sy=sy) {
     pattern_linear(x=rows, y=cols, sx=kx, sy=ky)
         pattern_circular(facing)
-            render() ksw(sw);
+            for (sw = supported)
+                render() ksw(sw);
     // lower key cutout hole
     let (
         x = base_bottom.x,
         y = base_bottom.y,
-        z = pinz(sw) + kcoz - plate,
+        z = pin + kcoz - plate,
         r = r_c1
     ) {
         translate([-x/2+r, -y/2+r, z])
@@ -173,7 +176,7 @@ pattern_linear(x=gx, y=gy, sx=sx, sy=sy) {
     let (
         x = kx*rows,
         y = ky*cols,
-        z = pinz(sw) + kcoz,
+        z = pin + kcoz,
         h = BASE_HEIGHT + h + STACKING_LIP_SIZE.y - z,
         r = r_base - max(sx-gap_mm.x-x,sy-gap_mm.y-y)/2
     ) {
