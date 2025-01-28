@@ -150,7 +150,7 @@ if (stackable) {
                 cutCylinders(n_divx=cdivx, n_divy=cdivy, cylinder_diameter=cd, cylinder_height=ch, coutout_depth=c_depth, orientation=c_orientation, chamfer=c_chamfer);
             }
         }
-        rounded_square([sx-gap_mm.x,sy-gap_mm.y,BASE_HEIGHT], 0, true);
+        rounded_square([sx*gx-gap_mm.x,sy*gy-gap_mm.y,BASE_HEIGHT], 0, true);
     }
 }
 gridfinityBase([gridx, gridy], hole_options=hole_options, only_corners=only_corners, thumbscrew=enable_thumbscrew);
