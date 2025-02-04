@@ -42,7 +42,7 @@ gridx = 1; //.5
 // number of bases along y-axis
 gridy = 1; //.5
 // keyswitch
-supported = [mx, kh, choc_v1, choc_v2, x];
+supported = [mx, choc_v1, choc_v2, x];
 // bin height. See bin height information and "gridz_define" below.
 gridz = max([for (sw = supported) h(sw)]);
 //gridz = ceil(h(sw)/7); //.1
@@ -159,19 +159,8 @@ pattern_linear(x=gx, y=gy, sx=sx, sy=sy) {
     pattern_linear(x=rows, y=cols, sx=kx, sy=ky)
         pattern_circular(facing)
             for (sw = supported)
-                render() ksw(sw);
-    // lower key cutout hole
-    let (
-        x = base_bottom.x,
-        y = base_bottom.y,
-        z = pin + kcoz - plate,
-        r = r_c1
-    ) {
-        translate([-x/2+r, -y/2+r, z])
-            rounded_square(
-                [x, y, BASE_HEIGHT+h-z], r
-            );
-    }
+                translate([0, 0, pin-pinz(sw)])
+                    render() ksw(sw);
     // upper keycap cutout hole
     let (
         x = kx*rows,
