@@ -42,7 +42,7 @@ gridx = 1; //.5
 // number of bases along y-axis
 gridy = 1; //.5
 // keyswitch
-supported = [mx, choc_v1, choc_v2, x];
+supported = [mx, choc_v1, choc_v2, x, ks33];
 // bin height. See bin height information and "gridz_define" below.
 gridz = max([for (sw = supported) h(sw)]);
 //gridz = ceil(h(sw)/7); //.1
