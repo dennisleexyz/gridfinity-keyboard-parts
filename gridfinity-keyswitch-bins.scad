@@ -125,7 +125,10 @@ sx = grid_dimensions.x;
 sy = grid_dimensions.y;
 
 ew = facing > 2; // East and West facing switches
-k = max([for (sw = supported) k(sw)]);
+k = max([
+    for (sw = supported)
+        for (k = k(sw)) k
+]);
 kx = ew ? max(k) : k.x;
 ky = ew ? max(k) : k.y;
 kcoz = min([for (sw = supported) kco(sw).z]);
